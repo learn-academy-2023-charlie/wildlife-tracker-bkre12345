@@ -2,12 +2,17 @@ class SightingsController < ApplicationController
     before_action :set_sighting, only: [:show, :update, :destroy]
 
     def index
+        if params[:start_date].present? && params[:end_date].present?
+            sightings = Sighting.where(date: params[:start_date]..params[:end_date])
+        else
         @sightings = Sighting.all
+        end
         render json: @sightings
     end
 
     def show
-        render json: @sighting
+        sighting = Sighting.includes(:animal).find(params[:id])
+        render json: sighting, include: :animal
     end
 
     def create
