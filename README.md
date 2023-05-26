@@ -13,6 +13,9 @@
 - private
     - defines what's accessible within the current class and not from outside
     - private defines set_sighting and sighting_params to hbe used internally within the controller, but not accessible as controller actions
+- updated index after associations
+    - checks if both start and end dates are present, and if it is it will retrieve all those dates due to the range operator(..)
+    - if any are missing, then it will return all sightings without filtering
 
 ## Database
 - associations
